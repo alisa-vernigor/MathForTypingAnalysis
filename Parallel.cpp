@@ -25,17 +25,6 @@ ParallelModuleTbb::ParallelModuleTbb() {
     tbb::parallel_for(tbb::blocked_range<size_t>(0, 1000), ParallelModuleTbb::EnvInit());
 }
 
-void ParallelModuleTbb::parallel_for(
-        Range range,
-        func_signature func,
-        std::vector<double>& grid,
-        std::vector<double>& output,
-        std::vector<double>& parameters) {
-    tbb::parallel_for(tbb::blocked_range<size_t>(
-                          range.begin, range.end),
-                      TbbFunction(func, grid, output, parameters));
-}
-
 ParallelModulePpl::ParallelModulePpl() {
     scheduler = Concurrency::Scheduler::Create(Concurrency::SchedulerPolicy{});
     scheduler->Attach();
