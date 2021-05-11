@@ -13,7 +13,7 @@ public:
                  std::vector<double>& means,
                  std::vector<double>& grid);
 
-    void operator()(const tbb::blocked_range<size_t>& r);
+    void operator()(tbb::blocked_range<size_t>& r) const;
 
 
 private:

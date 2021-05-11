@@ -2,25 +2,26 @@
 #define PARALLELMODULEWIN_H
 
 #include "Tbb/ParallelModuleTbb.h"
+#include "Ppl/ParallelModulePpl.h"
 
 class ParallelModuleWin : public ParallelModuleTbb, ParallelModulePpl {
-    using func_signature = std::function<double(double arg,
-        std::vector<double>& parameters)>;
-    using ParallelFor = std::function<void(Range range,
-                                       func_signature func,
-                                       std::vector<double>& grid,
-                                       std::vector<double>& output,
-                                       std::vector<double>& parameters)>;
+    using func_signature =
+          std::function<void(std::vector<double>& means,
+                             double& arg)>;
+
+    using ParallelFor = std::function<void(size_t begin,
+                                    size_t end,
+                                    func_signature func,
+                                    std::vector<double>& means,
+                                    std::vector<double>& grid)>;
 public:
     ParallelModuleWin();
-
-    void parallel_for (
-            Range range,
+    void parallel_for(
+            size_t begin,
+            size_t end,
             func_signature func,
-            std::vector<double>& grid,
-            std::vector<double>& output,
-            std::vector<double>& parameters) override;
-
+            std::vector<double>& means,
+            std::vector<double>& grid);
 
 private:
     ParallelFor current_for_method;

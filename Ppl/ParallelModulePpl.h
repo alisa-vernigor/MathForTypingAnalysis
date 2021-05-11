@@ -5,18 +5,17 @@
 
 class ParallelModulePpl {
     using func_signature =
-    std::function<void(double arg,
-    std::vector<double>& parameters)>;
-
+          std::function<void(std::vector<double>& means,
+                             double& arg)>;
 public:
     ParallelModulePpl();
-    ~ParallelModulePpl();
     void parallel_for(
-            Range range,
+            size_t begin,
+            size_t end,
             func_signature func,
-            std::vector<double>& grid,
-            std::vector<double>& output,
-            std::vector<double>& parameters) override;
+            std::vector<double>& means,
+            std::vector<double>& grid);
+    ~ParallelModulePpl();
 private:
      Concurrency::Scheduler *scheduler;
 };
