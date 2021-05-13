@@ -25,9 +25,13 @@ win32-g++*{
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
+    Functions/Function.cpp \
         MathModule.cpp \
         SimdDetector.cpp \
-        vectorclass/instrset_detect.cpp
+        vectorclass/instrset_detect.cpp \
+        Functions/MathFunctionExecuter.cpp \
+        Functions/MathFunctionExecuterAVX.cpp \
+        Functions/MathFunctionExecuterAVX2.cpp \
 
 
 INCLUDEPATH += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\include"
@@ -46,10 +50,19 @@ LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbmal
 LIBS += -L"$$PWD/dll/*.dll"
 
 HEADERS += \
+    Functions/Function.h \
     MathModule.h \
     ParallelModule.h \
-    SimdDetector.h
-    Selector.h
+    SimdDetector.h\
+    Functions/Selector.h \
+    Functions/ElementList.h \
+    Functions/FunctionHelper.h \
+    Functions/FunctionModuleBase.h \
+    Functions/NullType.h \
+    Functions/TypeList.h \
+    Functions/MathFunction.h \
+    Functions/MathFunctionExecuter.h \
+    Functions/InstructionLevels.h
 
 win32 {
     HEADERS += Windows/ParallelModuleWin.h \

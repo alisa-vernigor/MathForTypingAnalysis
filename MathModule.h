@@ -3,16 +3,19 @@
 
 #include "ParallelModule.h"
 #include "SimdDetector.h"
+#include "Functions/Function.h"
 
 class MathModuleBase {
-private:
-
+public:
+    NSSimd::SimdDetector detect_;
 };
 
-class MathModule : public MathModuleBase {
+class MathModule : private MathModuleBase {
+public:
+    MathModule();
 private:
     ParallelModule parallel_;
-public:
+    Function func_;
 };
 
 #endif // MATHMODULE_H
