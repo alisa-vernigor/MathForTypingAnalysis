@@ -1,7 +1,8 @@
 TEMPLATE = app
 CONFIG += c++17 rtti_off warn_on console
 CONFIG -= app_bundle
-CONFIG -= qt
+
+QT += core gui
 
 # Make warning level to be W4
 win32-msvc* {
@@ -23,12 +24,8 @@ win32-g++*{
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-        Windows/ParallelModuleWin.cpp \
-        Ppl/ParallelModulePpl.cpp \
-        Tbb/ParallelModuleTbb.cpp \
-        Tbb/TbbFunction.cpp \
-        main.cpp \
+SOURCES += main.cpp \
+        MathModule.cpp \
         SimdDetector.cpp \
         vectorclass/instrset_detect.cpp
 
@@ -50,17 +47,20 @@ LIBS += -L"$$PWD/dll/*.dll"
 
 HEADERS += \
     MathModule.h \
-    ParallelModuleWin.h \
-    Ppl/ParallelModulePpl.h \
-    Tbb/ParallelModuleTbb.h \
-    Tbb/TbbFunction.h \
+    ParallelModule.h \
     SimdDetector.h
     Selector.h
 
 win32 {
-    HEADERS += Windows/ParallelModuleWin.h
+    HEADERS += Windows/ParallelModuleWin.h \
+            Ppl/ParallelModulePpl.h \
+            Tbb/ParallelModuleTbb.h \
+            Tbb/TbbFunction.h \
 
-    SOURCES += Windows/ParallelModuleWin.cpp
+    SOURCES += Windows/ParallelModuleWin.cpp \
+            Ppl/ParallelModulePpl.cpp \
+            Tbb/ParallelModuleTbb.cpp \
+            Tbb/TbbFunction.cpp \
 }
 
 # A custom compiler
