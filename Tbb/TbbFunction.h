@@ -4,6 +4,8 @@
 #include <functional>
 #include <tbb/blocked_range.h>
 
+// Заменить на lambda
+
 class TbbFunction {
     using func_signature =
           std::function<void(std::vector<double>& means,
@@ -13,7 +15,7 @@ public:
                  std::vector<double>& means,
                  std::vector<double>& grid);
 
-    void operator()(tbb::blocked_range<size_t>& r) const;
+    void operator()(tbb::blocked_range<size_t>& r);
 
 
 private:

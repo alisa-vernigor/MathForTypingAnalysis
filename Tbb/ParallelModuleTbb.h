@@ -6,22 +6,27 @@
 #include <tbb/tbb.h>
 
 class ParallelModuleTbb  {
-    using func_signature =
-          std::function<void(std::vector<double>& means,
-                             double& arg)>;
 public:
     ParallelModuleTbb();
+
+    template<typename TFunc>
     void parallel_for(
             size_t begin,
             size_t end,
-            func_signature func,
-            std::vector<double>& means,
-            std::vector<double>& grid);
+            TFunc func) {
+        tbb::parallel_for(
+                    tbb::blocked_range<size_t>(begin, end),
+                    [&func](tbb::blocked_range<size_t>& r) mutable {
+            for (size_t it = r.begin(); it != r.end(); ++it) {
+                func(it);
+            }
+        });
+    }
 
 private:
 class EnvInit {
 public:
-    void operator()(const tbb::blocked_range<size_t> &r) const;
+    void operator()(tbb::blocked_range<size_t> &r);
     };
 };
 #endif // PARALLELMODULETBB_H

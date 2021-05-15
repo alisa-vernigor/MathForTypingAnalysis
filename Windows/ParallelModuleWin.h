@@ -5,26 +5,29 @@
 #include "Ppl/ParallelModulePpl.h"
 
 class ParallelModuleWin : public ParallelModuleTbb, ParallelModulePpl {
-    using func_signature =
-          std::function<void(std::vector<double>& means,
-                             double& arg)>;
-
-    using ParallelFor = std::function<void(size_t begin,
-                                    size_t end,
-                                    func_signature func,
-                                    std::vector<double>& means,
-                                    std::vector<double>& grid)>;
 public:
     ParallelModuleWin();
+
+    template<typename TFunc>
     void parallel_for(
             size_t begin,
             size_t end,
-            func_signature func,
-            std::vector<double>& means,
-            std::vector<double>& grid);
+            TFunc func) {
+
+        switch(method_index_) {
+          case 0:
+              ParallelModuleTbb::parallel_for(begin, end, func);
+          break;
+          case 1:
+             ParallelModulePpl::parallel_for(begin, end, func);
+          break;
+        }
+    }
 
 private:
-    ParallelFor current_for_method;
+    size_t method_index_ = 0;
 };
+
+size_t method_index_ = 0;
 
 #endif // PARALLELMODULEWIN_H

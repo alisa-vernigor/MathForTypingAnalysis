@@ -29,9 +29,6 @@ SOURCES += main.cpp \
         MathModule.cpp \
         SimdDetector.cpp \
         vectorclass/instrset_detect.cpp \
-        Functions/MathFunctionExecuter.cpp \
-        Functions/MathFunctionExecuterAVX.cpp \
-        Functions/MathFunctionExecuterAVX2.cpp \
 
 
 INCLUDEPATH += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\include"
@@ -61,7 +58,6 @@ HEADERS += \
     Functions/NullType.h \
     Functions/TypeList.h \
     Functions/MathFunction.h \
-    Functions/MathFunctionExecuter.h \
     Functions/InstructionLevels.h
 
 win32 {

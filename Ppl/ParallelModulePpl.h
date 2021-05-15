@@ -4,17 +4,20 @@
 #include "ppl.h"
 
 class ParallelModulePpl {
-    using func_signature =
-          std::function<void(std::vector<double>& means,
-                             double& arg)>;
 public:
     ParallelModulePpl();
+
+    template<typename TFunc>
     void parallel_for(
             size_t begin,
             size_t end,
-            func_signature func,
-            std::vector<double>& means,
-            std::vector<double>& grid);
+            TFunc func) {
+        Concurrency::parallel_for(begin,
+                                  end,
+                                  [&func](size_t ind){
+                                        func(ind);
+                                  });
+    }
     ~ParallelModulePpl();
 private:
      Concurrency::Scheduler *scheduler;
