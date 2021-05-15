@@ -4,7 +4,6 @@
 #include "vectorclass/vectorclass.h"
 #include "vectorclass/vectormath_exp.h"
 
-
 FindDensity0::FindDensity0(int instruction_level)
     : CBase(&find_density_0_AVX, &find_density_0_SSE, &find_density_0, instruction_level) {
 }

@@ -16,7 +16,7 @@ public:
             TFunc func) {
         tbb::parallel_for(
                     tbb::blocked_range<size_t>(begin, end),
-                    [&func](tbb::blocked_range<size_t>& r) mutable {
+                    [&func](tbb::blocked_range<size_t>& r) {
             for (size_t it = r.begin(); it != r.end(); ++it) {
                 func(it);
             }
@@ -26,7 +26,7 @@ public:
 private:
 class EnvInit {
 public:
-    void operator()(tbb::blocked_range<size_t> &r);
+    void operator()(tbb::blocked_range<size_t> &r) const;
     };
 };
 #endif // PARALLELMODULETBB_H

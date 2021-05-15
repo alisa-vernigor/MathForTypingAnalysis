@@ -28,6 +28,4 @@ private:
     size_t method_index_ = 0;
 };
 
-size_t method_index_ = 0;
-
 #endif // PARALLELMODULEWIN_H

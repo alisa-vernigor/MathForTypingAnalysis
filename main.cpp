@@ -1,15 +1,23 @@
 #include <iostream>
-#include <TbbInit.h>
-#include "Windows/ParallelModuleWin.h"
 
-void func(std::vector<double>& v, double& a) {
-    std::cout << "Test" << std::endl;
-}
+#include <MathModule.h>
+
+#include <vector>
 
 int main() {
-    ParallelModuleWin obj;
-    std::vector<double> v(2000000, 0);
-    std::vector<double> v1(2000000, 0);
-    std::vector<double> v2(2000000, 0);
-    //obj.parallel_for(0, 2000000, func, v, v1);
+    MathModule math;
+    std::vector<double> grid(10, 0);
+    for (size_t i = 0; i < grid.size(); ++i) {
+        grid[i] = i;
+    }
+
+    std::vector<double> mean(1, 1);
+
+    std::vector<double> result(grid.size(), 0);
+
+    math.find_density_0_on_grid(mean, grid, &result);
+
+    for (size_t i = 0; i < result.size(); ++i) {
+        std::cout << i << ": " << result[i] << std::endl;
+    }
 }
