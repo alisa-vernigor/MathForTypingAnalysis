@@ -25,6 +25,8 @@ public:
     void find_density_2_on_grid(std::vector<double>& means,
                                 std::vector<double>& grid,
                                 std::vector<double>* result);
+    void switch_lib(Libs lib = Libs::TBB);
+    void print_current_lib();
 
 private:
     ParallelModule parallel_;

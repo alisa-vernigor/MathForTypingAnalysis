@@ -28,6 +28,7 @@ SOURCES += main.cpp \
     Functions/Function.cpp \
         MathModule.cpp \
         SimdDetector.cpp \
+    Tests/tests.cpp \
         vectorclass/instrset_detect.cpp \
 
 
@@ -58,7 +59,8 @@ HEADERS += \
     Functions/NullType.h \
     Functions/TypeList.h \
     Functions/MathFunction.h \
-    Functions/InstructionLevels.h
+    Functions/InstructionLevels.h \
+    Tests/tests.h
 
 win32 {
     HEADERS += Windows/ParallelModuleWin.h \
