@@ -7,7 +7,8 @@
 
 class Tests {
 public:
-    Tests();
+    Tests(size_t size);
+
     void test_density_avx_ppl(std::vector<double>& means,
                               std::vector<double>& grid,
                               std::vector<double>* result);
@@ -37,11 +38,15 @@ public:
     void test_density_default_default(std::vector<double>& means,
                                       std::vector<double>& grid,
                                       std::vector<double>* result);
-
 private:
-    MathModule m_;
-    FindDensity func_;
-    ParallelModule parallel_;
+    void init_x(size_t size, std::vector<double>& x, double step);
+
+    void init_m(size_t size);
+
+    std::vector<double> m_;
+    std::vector<double> x1_;
+    std::vector<double> x2_;
+    std::vector<double> x3_;
 };
 
 #endif // TESTS_H

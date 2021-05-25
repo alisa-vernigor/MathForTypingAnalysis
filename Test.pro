@@ -30,6 +30,7 @@ SOURCES += main.cpp \
         SimdDetector.cpp \
     Tests/tests.cpp \
         vectorclass/instrset_detect.cpp \
+        TimeMeasurer.cpp
 
 
 INCLUDEPATH += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\include"
@@ -60,7 +61,8 @@ HEADERS += \
     Functions/TypeList.h \
     Functions/MathFunction.h \
     Functions/InstructionLevels.h \
-    Tests/tests.h
+    Tests/tests.h \
+    TimeMeasurer.h
 
 win32 {
     HEADERS += Windows/ParallelModuleWin.h \
