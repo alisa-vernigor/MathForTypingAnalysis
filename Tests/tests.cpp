@@ -1,5 +1,11 @@
 #include "tests.h"
 
+FindDensity Tests::func_avx_(7);
+FindDensity Tests::func_sse_(2);
+FindDensity Tests::func_default_(0);
+ParallelModuleTbb Tests::parallel_tbb_;
+ParallelModulePpl Tests::parallel_ppl_;
+
 Tests::Tests(size_t size) {
     init_m(size);
     init_x(size, x1_, 1);
@@ -10,22 +16,18 @@ Tests::Tests(size_t size) {
 void Tests::test_density_avx_ppl(std::vector<double>& means,
                                  std::vector<double>& grid,
                                  std::vector<double>* result) {
-    FindDensity func(7);
-    ParallelModulePpl parallel;
 
-    parallel.parallel_for(0, grid.size(), [&func, &grid, &means, &result](size_t ind) mutable {
-       func.find_density_0(means, grid[ind], &(*result)[ind]);
+    parallel_ppl_.parallel_for(0, grid.size(), [&grid, &means, &result](size_t ind) mutable {
+       func_avx_.find_density_0(means, grid[ind], &(*result)[ind]);
     });
 }
 
 void Tests::test_density_avx_tbb(std::vector<double>& means,
                                  std::vector<double>& grid,
                                  std::vector<double>* result) {
-    FindDensity func(7);
-    ParallelModuleTbb parallel;
 
-    parallel.parallel_for(0, grid.size(), [&func, &grid, &means, &result](size_t ind) mutable {
-       func.find_density_0(means, grid[ind], &(*result)[ind]);
+    parallel_tbb_.parallel_for(0, grid.size(), [&grid, &means, &result](size_t ind) mutable {
+       func_avx_.find_density_0(means, grid[ind], &(*result)[ind]);
     });
 }
 
@@ -98,11 +100,8 @@ void Tests::test_density_default_ppl(std::vector<double>& means,
 void Tests::test_density_default_default(std::vector<double> &means,
                                  std::vector<double>& grid,
                                  std::vector<double>* result) {
-    FindDensity func(0);
-    ParallelModulePpl parallel;
-
     for (size_t i = 0; i < grid.size(); ++i) {
-        func.find_density_0(means, grid[i], &(*result)[i]);
+        func_default_.find_density_0(means, grid[i], &(*result)[i]);
     }
 }
 
