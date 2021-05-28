@@ -1,5 +1,13 @@
 #include "tests.h"
 
+std::ostream& operator<<(std::ostream& os, const Result& res) {
+    os << "    > Maximum time: " << std:: chrono::duration_cast<std::chrono::microseconds>(res.max_time).count() <<
+               " microseconds\n"
+    "    > Minimum time: " << std::chrono::duration_cast<std::chrono::microseconds>(res.min_time).count() << " microseconds\n"
+    "    > Average time: " << std::chrono::duration_cast<std::chrono::microseconds>(res.average_time).count() << " microseconds";
+    return os;
+}
+
 FindDensity Tests::func_avx_(7);
 FindDensity Tests::func_sse_(2);
 FindDensity Tests::func_default_(0);
@@ -34,66 +42,49 @@ void Tests::test_density_avx_tbb(std::vector<double>& means,
 void Tests::test_density_avx_default(std::vector<double>& means,
                                  std::vector<double>& grid,
                                  std::vector<double>* result) {
-    FindDensity func(7);
-    ParallelModulePpl parallel;
 
     for (size_t i = 0; i < grid.size(); ++i) {
-        func.find_density_0(means, grid[i], &(*result)[i]);
+        func_avx_.find_density_0(means, grid[i], &(*result)[i]);
     }
 }
 
 void Tests::test_density_sse_tbb(std::vector<double>& means,
                                  std::vector<double>& grid,
                                  std::vector<double>* result) {
-    FindDensity func(2);
-    ParallelModuleTbb parallel;
-
-    parallel.parallel_for(0, grid.size(), [&func, &grid, &means, &result](size_t ind) mutable {
-       func.find_density_0(means, grid[ind], &(*result)[ind]);
+    parallel_tbb_.parallel_for(0, grid.size(), [&grid, &means, &result](size_t ind) mutable {
+       func_sse_.find_density_0(means, grid[ind], &(*result)[ind]);
     });
 }
 
 void Tests::test_density_sse_ppl(std::vector<double>& means,
                                  std::vector<double>& grid,
                                  std::vector<double>* result) {
-    FindDensity func(2);
-    ParallelModulePpl parallel;
-
-    parallel.parallel_for(0, grid.size(), [&func, &grid, &means, &result](size_t ind) mutable {
-       func.find_density_0(means, grid[ind], &(*result)[ind]);
+    parallel_ppl_.parallel_for(0, grid.size(), [&grid, &means, &result](size_t ind) mutable {
+       func_sse_.find_density_0(means, grid[ind], &(*result)[ind]);
     });
 }
 
 void Tests::test_density_sse_default(std::vector<double> &means,
                                  std::vector<double>& grid,
                                  std::vector<double>* result) {
-    FindDensity func(2);
-    ParallelModulePpl parallel;
-
     for (size_t i = 0; i < grid.size(); ++i) {
-        func.find_density_0(means, grid[i], &(*result)[i]);
+        func_sse_.find_density_0(means, grid[i], &(*result)[i]);
     }
 }
 
 void Tests::test_density_default_tbb(std::vector<double>& means,
                                  std::vector<double>& grid,
                                  std::vector<double>* result) {
-    FindDensity func(0);
-    ParallelModuleTbb parallel;
-
-    parallel.parallel_for(0, grid.size(), [&func, &grid, &means, &result](size_t ind) mutable {
-       func.find_density_0(means, grid[ind], &(*result)[ind]);
+    parallel_tbb_.parallel_for(0, grid.size(), [&grid, &means, &result](size_t ind) mutable {
+       func_default_.find_density_0(means, grid[ind], &(*result)[ind]);
     });
 }
 
 void Tests::test_density_default_ppl(std::vector<double>& means,
                                  std::vector<double>& grid,
                                  std::vector<double>* result) {
-    FindDensity func(0);
-    ParallelModulePpl parallel;
-
-    parallel.parallel_for(0, grid.size(), [&func, &grid, &means, &result](size_t ind) mutable {
-       func.find_density_0(means, grid[ind], &(*result)[ind]);
+    parallel_ppl_.parallel_for(0, grid.size(), [&grid, &means, &result](size_t ind) mutable {
+       func_default_.find_density_0(means, grid[ind], &(*result)[ind]);
     });
 }
 

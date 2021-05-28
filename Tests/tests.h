@@ -6,10 +6,14 @@
 #include "ParallelModule.h"
 #include "TimeMeasurer.h"
 
+#include <iostream>
+
 struct Result {
     std::chrono::microseconds max_time;
     std::chrono::microseconds min_time;
     std::chrono::microseconds average_time;
+
+    friend std::ostream& operator<<(std::ostream& os, const Result& res);
 };
 
 class Tests {
