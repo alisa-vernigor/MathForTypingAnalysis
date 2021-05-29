@@ -49,8 +49,8 @@ int main() {
    Tests t(2500);
 
    cout << "Input data:\n1) Random vector of doubles means (size = 2500).\n"
-"2) Vectors of doubles x1 (from 0 with step 1), x2 (from 0 with step 5) and "
-"x3 (from 0 with step 10) with size = 2500." << "\n\n";
+"2) Vectors of doubles x1 (from 0 to 2500 with step 1), x2 (from 0 to 2500 step 5) and "
+"x3 (from 0 to 2500 step 10)." << "\n\n";
 
    Results res;
 

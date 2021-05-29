@@ -103,9 +103,10 @@ void Tests::init_m(size_t size) {
     }
 }
 
-void Tests::init_x(size_t size, std::vector<double>& x, double step) {
-    x.resize(size);
-    for (size_t i = 0; i < size; ++i) {
-        x[i] = (i == 0) ? 0 : (x[i - 1] + step);
+void Tests::init_x(size_t max, std::vector<double>& x, size_t step) {
+    x.resize(max / step + 1);
+
+    for (size_t i = 0; i < x.size(); ++i) {
+        x[i] = i * step;
     }
 }

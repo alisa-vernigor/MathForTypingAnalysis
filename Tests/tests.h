@@ -87,7 +87,7 @@ public:
     std::vector<double> x2_;
     std::vector<double> x3_;
 private:
-    void init_x(size_t size, std::vector<double>& x, double step);
+    void init_x(size_t size, std::vector<double>& x, size_t step);
 
     void init_m(size_t size);
 
