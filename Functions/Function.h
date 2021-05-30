@@ -25,6 +25,9 @@ static double find_sum(Vec4d arg) {
 }
 
 // FindDensity0
+namespace MathModule {
+namespace Functions {
+
 using CFindDensity0Base =
     NSMath::FunctionModuleBase<void(const std::vector<double>&,
                             const double, double*),
@@ -300,5 +303,7 @@ private:
     FindDensity1 fd1_;
     FindDensity2 fd2_;
 };
+}
+}
 
 #endif // FUNCTION_H

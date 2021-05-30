@@ -91,11 +91,11 @@ private:
 
     void init_m(size_t size);
 
-    static FindDensity func_avx_;
-    static FindDensity func_sse_;
-    static FindDensity func_default_;
-    static ParallelModulePpl parallel_ppl_;
-    static ParallelModuleTbb parallel_tbb_;
+    static MathModule::Functions::FindDensity func_avx_;
+    static MathModule::Functions::FindDensity func_sse_;
+    static MathModule::Functions::FindDensity func_default_;
+    static MathModule::Parallel::ParallelModulePpl parallel_ppl_;
+    static MathModule::Parallel::ParallelModuleTbb parallel_tbb_;
 };
 
 #endif // TESTS_H

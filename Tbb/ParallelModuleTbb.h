@@ -5,6 +5,8 @@
 #include <tbb/blocked_range.h>
 #include <tbb/tbb.h>
 
+namespace MathModule {
+namespace Parallel {
 class ParallelModuleTbb  {
 public:
     ParallelModuleTbb();
@@ -29,4 +31,6 @@ public:
     void operator()(tbb::blocked_range<size_t> &r) const;
     };
 };
+}
+}
 #endif // PARALLELMODULETBB_H

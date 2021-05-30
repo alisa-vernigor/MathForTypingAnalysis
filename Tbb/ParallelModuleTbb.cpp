@@ -1,5 +1,7 @@
 #include "Tbb/ParallelModuleTbb.h"
 
+namespace MathModule {
+namespace Parallel {
 ParallelModuleTbb::ParallelModuleTbb() {
     tbb::parallel_for(tbb::blocked_range<size_t>(0, 1000),
                       ParallelModuleTbb::EnvInit());
@@ -14,4 +16,6 @@ void ParallelModuleTbb::EnvInit::operator()(tbb::blocked_range<size_t>& r) const
           }
       }
     }
+}
+}
 }

@@ -5,6 +5,8 @@
 #include "Ppl/ParallelModulePpl.h"
 #include <string>
 
+namespace MathModule {
+namespace Parallel {
 enum Libs {
     TBB, PPL
 };
@@ -34,5 +36,7 @@ public:
 private:
     size_t method_index_ = 0;
 };
+}
+}
 
 #endif // PARALLELMODULEWIN_H

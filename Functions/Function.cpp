@@ -4,6 +4,9 @@
 #include "vectorclass/vectorclass.h"
 #include "vectorclass/vectormath_exp.h"
 
+namespace MathModule {
+namespace Functions {
+
 FindDensity0::FindDensity0(int instruction_level)
     : CBase(&find_density_0_AVX, &find_density_0_SSE, &find_density_0, instruction_level) {
 }
@@ -30,4 +33,6 @@ void FindDensity::find_density_1(const std::vector<double>& means, const double 
 void FindDensity::find_density_2(const std::vector<double>& means, const double arg,
                                  double* result) {
       fd2_(means, arg, result);
+}
+}
 }

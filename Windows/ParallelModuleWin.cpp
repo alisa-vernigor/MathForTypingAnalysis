@@ -1,6 +1,9 @@
 #include "Windows/ParallelModuleWin.h"
 #include <iostream>
 
+namespace MathModule {
+namespace Parallel {
+
 ParallelModuleWin::ParallelModuleWin(): method_index_(0){}
 
 void ParallelModuleWin::print_current_lib() {
@@ -17,4 +20,6 @@ void ParallelModuleWin::switch_lib(Libs lib) {
     } else {
         method_index_ = 1;
     }
+}
+}
 }

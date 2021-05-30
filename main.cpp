@@ -10,7 +10,7 @@
 using namespace std;
 
 enum CurrentConfiguration {
-    IT_NUM = 250
+    IT_NUM = 1
 };
 
 struct Results {

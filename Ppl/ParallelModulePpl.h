@@ -3,6 +3,9 @@
 
 #include "ppl.h"
 
+namespace MathModule {
+namespace Parallel {
+
 class ParallelModulePpl {
 public:
     ParallelModulePpl();
@@ -22,4 +25,6 @@ public:
 private:
      Concurrency::Scheduler *scheduler;
 };
+}
+}
 #endif // PARALLELMODULEPPL_H

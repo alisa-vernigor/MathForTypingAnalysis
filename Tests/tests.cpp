@@ -8,11 +8,11 @@ std::ostream& operator<<(std::ostream& os, const Result& res) {
     return os;
 }
 
-FindDensity Tests::func_avx_(7);
-FindDensity Tests::func_sse_(2);
-FindDensity Tests::func_default_(0);
-ParallelModuleTbb Tests::parallel_tbb_;
-ParallelModulePpl Tests::parallel_ppl_;
+MathModule::Functions::FindDensity Tests::func_avx_(7);
+MathModule::Functions::FindDensity Tests::func_sse_(2);
+MathModule::Functions::FindDensity Tests::func_default_(0);
+MathModule::Parallel::ParallelModuleTbb Tests::parallel_tbb_;
+MathModule::Parallel::ParallelModulePpl Tests::parallel_ppl_;
 
 Tests::Tests(size_t size) {
     init_m(size);
