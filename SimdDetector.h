@@ -3,9 +3,9 @@
 
 namespace NSSimd {
 
-class SimdDetector {
+class СSimdDetector {
 public:
-  SimdDetector();
+  СSimdDetector();
   int level() const;
 
 private:

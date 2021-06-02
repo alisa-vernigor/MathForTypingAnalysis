@@ -1,13 +1,13 @@
 #include "ParallelModulePpl.h"
 
-namespace MathModule {
-namespace Parallel {
-ParallelModulePpl::ParallelModulePpl() {
+namespace NSMathModule {
+namespace NSParallel {
+CParallelModulePpl::CParallelModulePpl() {
     scheduler = Concurrency::Scheduler::Create(Concurrency::SchedulerPolicy{});
     scheduler->Attach();
 }
 
-ParallelModulePpl::~ParallelModulePpl() {
+CParallelModulePpl::~CParallelModulePpl() {
     Concurrency::CurrentScheduler::Detach();
 }
 }

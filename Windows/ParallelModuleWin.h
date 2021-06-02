@@ -5,13 +5,13 @@
 #include "Ppl/ParallelModulePpl.h"
 #include <string>
 
-namespace MathModule {
-namespace Parallel {
+namespace NSMathModule {
+namespace NSParallel {
 enum Libs {
     TBB, PPL
 };
 
-class ParallelModuleWin : public ParallelModuleTbb, ParallelModulePpl {
+class ParallelModuleWin : public CParallelModuleTbb, CParallelModulePpl {
 public:
     ParallelModuleWin();
     template<typename TFunc>
@@ -22,10 +22,10 @@ public:
 
         switch(method_index_) {
           case 0:
-              ParallelModuleTbb::parallel_for(begin, end, func);
+              CParallelModuleTbb::parallel_for(begin, end, func);
           break;
           case 1:
-             ParallelModulePpl::parallel_for(begin, end, func);
+             CParallelModulePpl::parallel_for(begin, end, func);
           break;
         }
     }

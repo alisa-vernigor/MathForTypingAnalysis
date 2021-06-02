@@ -7,15 +7,19 @@
 
 #include <vector>
 
-namespace MathModule {
-    class MathModuleBase {
+namespace NSMathModule {
+    class СMathModuleBase {
     public:
-        NSSimd::SimdDetector detect_;
+        int level() const {
+            return detect_.level();
+        }
+    private:
+        NSSimd::СSimdDetector detect_;
     };
 
-    class MathModule : private MathModuleBase {
+    class СMathModule : protected СMathModuleBase {
     public:
-        MathModule();
+        СMathModule();
 
         void find_density_0_on_grid(std::vector<double>& means,
                                     std::vector<double>& grid,
@@ -26,12 +30,12 @@ namespace MathModule {
         void find_density_2_on_grid(std::vector<double>& means,
                                     std::vector<double>& grid,
                                     std::vector<double>* result);
-        void switch_lib(Parallel::Libs lib = Parallel::Libs::TBB);
+        void switch_lib(NSParallel::Libs lib = NSParallel::Libs::TBB);
         void print_current_lib();
 
     private:
-        Parallel::ParallelModule parallel_;
-        Functions::FindDensity func_;
+        NSParallel::СParallelModule parallel_;
+        NSFunctions::CDensity func_;
     };
 }
 

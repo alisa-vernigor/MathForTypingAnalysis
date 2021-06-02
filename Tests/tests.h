@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+namespace NSTests {
+
 struct Result {
     std::chrono::microseconds max_time;
     std::chrono::microseconds min_time;
@@ -16,9 +18,9 @@ struct Result {
     friend std::ostream& operator<<(std::ostream& os, const Result& res);
 };
 
-class Tests {
+class CTests {
 public:
-    Tests(size_t size);
+    CTests(size_t size);
 
     static void test_density_avx_ppl(std::vector<double>& means,
                               std::vector<double>& grid,
@@ -61,7 +63,7 @@ public:
 
         for (size_t i = 0; i < it_num; ++i) {
             if (i >= skip_num) {
-                CTimeAnchor c;
+                NSTimeMeasurer::CTimeAnchor c;
                 test(m_, x, &res);
                 time = c.get_time();
 
@@ -91,11 +93,12 @@ private:
 
     void init_m(size_t size);
 
-    static MathModule::Functions::FindDensity func_avx_;
-    static MathModule::Functions::FindDensity func_sse_;
-    static MathModule::Functions::FindDensity func_default_;
-    static MathModule::Parallel::ParallelModulePpl parallel_ppl_;
-    static MathModule::Parallel::ParallelModuleTbb parallel_tbb_;
+    static NSMathModule::NSFunctions::CDensity func_avx_;
+    static NSMathModule::NSFunctions::CDensity func_sse_;
+    static NSMathModule::NSFunctions::CDensity func_default_;
+    static NSMathModule::NSParallel::CParallelModulePpl parallel_ppl_;
+    static NSMathModule::NSParallel::CParallelModuleTbb parallel_tbb_;
 };
+}
 
 #endif // TESTS_H

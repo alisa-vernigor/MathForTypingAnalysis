@@ -3,10 +3,10 @@
 
 namespace NSSimd {
 
-SimdDetector::SimdDetector() : InstructionLevel_(instrset_detect()) {
+СSimdDetector::СSimdDetector() : InstructionLevel_(instrset_detect()) {
 }
 
-int SimdDetector::level() const {
+int СSimdDetector::level() const {
   return InstructionLevel_;
 }
 

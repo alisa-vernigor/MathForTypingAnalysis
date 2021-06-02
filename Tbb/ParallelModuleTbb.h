@@ -5,11 +5,11 @@
 #include <tbb/blocked_range.h>
 #include <tbb/tbb.h>
 
-namespace MathModule {
-namespace Parallel {
-class ParallelModuleTbb  {
+namespace NSMathModule {
+namespace NSParallel {
+class CParallelModuleTbb  {
 public:
-    ParallelModuleTbb();
+    CParallelModuleTbb(size_t init_iter = kdefault_init_iter_num);
 
     template<typename TFunc>
     void parallel_for(
@@ -26,10 +26,7 @@ public:
     }
 
 private:
-class EnvInit {
-public:
-    void operator()(tbb::blocked_range<size_t> &r) const;
-    };
+    static constexpr size_t kdefault_init_iter_num = 1000;
 };
 }
 }

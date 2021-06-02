@@ -5,9 +5,9 @@
 
 #ifdef Q_OS_WIN
 #include "Windows/ParallelModuleWin.h"
-namespace MathModule {
-namespace Parallel {
-using ParallelModule = ParallelModuleWin;
+namespace NSMathModule {
+namespace NSParallel {
+using СParallelModule = ParallelModuleWin;
 }
 }
 

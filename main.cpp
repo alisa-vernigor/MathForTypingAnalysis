@@ -14,9 +14,9 @@ enum CurrentConfiguration {
 };
 
 struct Results {
-    Result res_x1;
-    Result res_x2;
-    Result res_x3;
+    NSTests::Result res_x1;
+    NSTests::Result res_x2;
+    NSTests::Result res_x3;
 
     friend std::ostream& operator<<(std::ostream& os, const Results& res);
 };
@@ -33,7 +33,7 @@ std::ostream& operator<<(std::ostream& os, const Results& res) {
 }
 
 template<typename TFunc>
-void fill_results(Tests& t, TFunc func, size_t it_num, Results *res) {
+void fill_results(NSTests::CTests& t, TFunc func, size_t it_num, Results *res) {
     res->res_x1 = t.test_one(func, t.x1_, it_num);
     res->res_x2 = t.test_one(func, t.x2_, it_num);
     res->res_x3 = t.test_one(func, t.x3_, it_num);
@@ -46,7 +46,7 @@ void output_results(size_t id, string name, Results res) {
 
 int main() {
    freopen("results.txt", "w", stdout);
-   Tests t(2500);
+   NSTests::CTests t(2500);
 
    cout << "Input data:\n1) Random vector of doubles means (size = 2500).\n"
 "2) Vectors of doubles x1 (from 0 to 2500 with step 1), x2 (from 0 to 2500 step 5) and "

@@ -3,12 +3,12 @@
 
 #include "ppl.h"
 
-namespace MathModule {
-namespace Parallel {
+namespace NSMathModule {
+namespace NSParallel {
 
-class ParallelModulePpl {
+class CParallelModulePpl {
 public:
-    ParallelModulePpl();
+    CParallelModulePpl();
 
     template<typename TFunc>
     void parallel_for(
@@ -21,7 +21,7 @@ public:
                                         func(ind);
                                   });
     }
-    ~ParallelModulePpl();
+    ~CParallelModulePpl();
 private:
      Concurrency::Scheduler *scheduler;
 };

@@ -1,8 +1,8 @@
 #include "Windows/ParallelModuleWin.h"
 #include <iostream>
 
-namespace MathModule {
-namespace Parallel {
+namespace NSMathModule {
+namespace NSParallel {
 
 ParallelModuleWin::ParallelModuleWin(): method_index_(0){}
 
