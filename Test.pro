@@ -10,6 +10,16 @@ win32-msvc* {
     QMAKE_CXXFLAGS_WARN_ON ~= s/-W./-W4
 }
 
+SOURCES += main.cpp \
+    Functions/Function.cpp \
+    Functions/FunctionSSE2.cpp \
+        MathModule.cpp \
+        SimdDetector.cpp \
+    Tests/tests.cpp \
+        vectorclass/instrset_detect.cpp \
+        TimeMeasurer.cpp
+
+
 # Exception handling model for MSVC
 # Required for PPL
 win32-msvc* {
@@ -17,6 +27,7 @@ win32-msvc* {
 
     # A custom compiler
     # The compiler compiles on AVX level
+    SOURCES_AVX += Functions/FunctionAVX.cpp
     AVX_FLAGS =
     win32-msvc*:AVX_FLAGS = /arch:AVX
     AVX_OUT =
@@ -31,6 +42,7 @@ win32-msvc* {
 
     # A custom compiler
     # The compiler compiles on AVX2 level
+    SOURCES_AVX += Functions/FunctionAVX2.cpp
     AVX2_FLAGS =
     win32-msvc*:AVX2_FLAGS = /arch:AVX2
     AVX2_OUT =
@@ -52,28 +64,22 @@ win32-g++*{
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += main.cpp \
-    Functions/Function.cpp \
-        MathModule.cpp \
-        SimdDetector.cpp \
-    Tests/tests.cpp \
-        vectorclass/instrset_detect.cpp \
-        TimeMeasurer.cpp
+TBBPATH = "C:\Program Files (x86)\Intel\oneAPI\tbb\latest"
+INCLUDEPATH += $${TBBPATH}"\include"
+LIBS += "-L"$${TBBPATH}"\lib\intel64\vc_mt"
 
-
-INCLUDEPATH += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\include"
-LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbb.lib"
-LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbb12.lib"
-LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbb_debug.lib"
-LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbb12_debug.lib"
-LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbbind.lib"
-LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbbind_2_0.lib"
-LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbbind_2_0_debug.lib"
-LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbbind_debug.lib"
-LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbmalloc.lib"
-LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbmalloc_debug.lib"
-LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbmalloc_proxy.lib"
-LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbmalloc_proxy_debug.lib"
+# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbb.lib"
+# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbb12.lib"
+# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbb_debug.lib"
+# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbb12_debug.lib"
+# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbbind.lib"
+# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbbind_2_0.lib"
+# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbbind_2_0_debug.lib"
+# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbbind_debug.lib"
+# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbmalloc.lib"
+# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbmalloc_debug.lib"
+# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbmalloc_proxy.lib"
+# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbmalloc_proxy_debug.lib"
 LIBS += -L"$$PWD/dll/*.dll"
 
 HEADERS += \

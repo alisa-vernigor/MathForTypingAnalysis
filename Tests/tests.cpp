@@ -1,7 +1,7 @@
 #include "tests.h"
 
 namespace NSTests {
-std::ostream& operator<<(std::ostream& os, const Result& res) {
+std::ostream& operator<<(std::ostream& os, const CResult& res) {
     os << "    > Maximum time: " << std:: chrono::duration_cast<std::chrono::microseconds>(res.max_time).count() <<
                " microseconds\n"
     "    > Minimum time: " << std::chrono::duration_cast<std::chrono::microseconds>(res.min_time).count() << " microseconds\n"
@@ -10,6 +10,7 @@ std::ostream& operator<<(std::ostream& os, const Result& res) {
 }
 
 NSMathModule::NSFunctions::CDensity CTests::func_avx_(NSSimd::CInstrLevel::AVX);
+NSMathModule::NSFunctions::CDensity CTests::func_avx2_(NSSimd::CInstrLevel::AVX2);
 NSMathModule::NSFunctions::CDensity CTests::func_sse_(NSSimd::CInstrLevel::SSE2);
 NSMathModule::NSFunctions::CDensity CTests::func_default_(NSSimd::CInstrLevel::Default);
 NSMathModule::NSParallel::CParallelModuleTbb CTests::parallel_tbb_;
@@ -40,6 +41,15 @@ void CTests::test_density_avx_tbb(std::vector<double>& means,
     });
 }
 
+void CTests::test_density_avx2_tbb(std::vector<double>& means,
+                                 std::vector<double>& grid,
+                                 std::vector<double>* result) {
+
+    parallel_tbb_.parallel_for(0, grid.size(), [&grid, &means, &result](size_t ind) mutable {
+       (*result)[ind] = func_avx2_.compute0(means, grid[ind]);
+    });
+}
+
 void CTests::test_density_avx_default(std::vector<double>& means,
                                  std::vector<double>& grid,
                                  std::vector<double>* result) {
@@ -65,11 +75,27 @@ void CTests::test_density_sse_ppl(std::vector<double>& means,
     });
 }
 
+void CTests::test_density_avx2_ppl(std::vector<double>& means,
+                                 std::vector<double>& grid,
+                                 std::vector<double>* result) {
+    parallel_ppl_.parallel_for(0, grid.size(), [&grid, &means, &result](size_t ind) mutable {
+       (*result)[ind] = func_avx2_.compute0(means, grid[ind]);
+    });
+}
+
 void CTests::test_density_sse_default(std::vector<double> &means,
                                  std::vector<double>& grid,
                                  std::vector<double>* result) {
     for (size_t i = 0; i < grid.size(); ++i) {
         (*result)[i] =func_sse_.compute0(means, grid[i]);
+    }
+}
+
+void CTests::test_density_avx2_default(std::vector<double> &means,
+                                 std::vector<double>& grid,
+                                 std::vector<double>* result) {
+    for (size_t i = 0; i < grid.size(); ++i) {
+        (*result)[i] =func_avx2_.compute0(means, grid[i]);
     }
 }
 

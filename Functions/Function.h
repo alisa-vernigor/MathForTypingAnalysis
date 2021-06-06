@@ -37,7 +37,7 @@ namespace NSFunctions {
 
 using CDensity0Base =
     NSMath::FunctionModuleBase<double(const std::vector<double>&, const double),
-                       NSSimd::CInstrLevel::AVX, NSSimd::CInstrLevel::SSE>;
+                       NSSimd::CInstrLevel::AVX2, NSSimd::CInstrLevel::AVX, NSSimd::CInstrLevel::SSE>;
 
 
 class CDensity0 : public CDensity0Base {
@@ -59,8 +59,9 @@ public:
 
 private:
     static double compute0(const std::vector<double>& means, double arg);
-    static double compute0_SSE(const std::vector<double>& means, double arg);
+    static double compute0_SSE2(const std::vector<double>& means, double arg);
     static double compute0_AVX(const std::vector<double>& means, double arg);
+    static double compute0_AVX2(const std::vector<double>& means, double arg);
 
     static constexpr const double one_over_sqrt_two_pi = 0.398942280401432702863218082712;
 };
@@ -69,7 +70,7 @@ private:
 // FindDensity1
 using CDensity1Base =
 NSMath::FunctionModuleBase<double(const std::vector<double>&, double),
-                   NSSimd::CInstrLevel::AVX, NSSimd::CInstrLevel::SSE>;
+                   NSSimd::CInstrLevel::AVX2, NSSimd::CInstrLevel::AVX, NSSimd::CInstrLevel::SSE>;
 
 class CDensity1 : public CDensity1Base {
     using CBase = CDensity1Base;
@@ -92,7 +93,8 @@ public:
 private:
     static double compute1(const std::vector<double>& means, double arg);
     static double compute1_AVX(const std::vector<double>& means, double arg);
-    static double compute1_SSE(const std::vector<double>& means, double arg);
+    static double compute1_SSE2(const std::vector<double>& means, double arg);
+    static double compute1_AVX2(const std::vector<double>& means, double arg);
 
     static constexpr const double one_over_sqrt_two_pi = 0.398942280401432702863218082712;
 };
@@ -101,7 +103,7 @@ private:
 // FindDensity2
 using CDensity2Base =
 NSMath::FunctionModuleBase<double(const std::vector<double>&, double),
-                   NSSimd::CInstrLevel::AVX, NSSimd::CInstrLevel::SSE>;
+                   NSSimd::CInstrLevel::AVX2, NSSimd::CInstrLevel::AVX, NSSimd::CInstrLevel::SSE>;
 
 class CDensity2 : public CDensity0Base {
     using CBase = CDensity0Base;
@@ -124,7 +126,8 @@ public:
 private:
     static double compute2(const std::vector<double>& means, double arg);
     static double compute2_AVX(const std::vector<double>& means, double arg);
-    static double compute2_SSE(const std::vector<double>& means, double arg);
+    static double compute2_SSE2(const std::vector<double>& means, double arg);
+    static double compute2_AVX2(const std::vector<double>& means, double arg);
 
     static constexpr const double one_over_sqrt_two_pi = 0.398942280401432702863218082712;
 };
