@@ -15,7 +15,7 @@ namespace NSMathModule {
 namespace NSFunctions {
 namespace NSFunctionsDetail {
 
-// Helping function
+
 inline double find_sum(double arg) {
     return arg;
 }
@@ -28,12 +28,7 @@ inline double find_sum(Vec4d arg) {
     return arg[0] + arg[1] + arg[3] + arg[4];
 }
 }
-}
-}
 
-// FindDensity0
-namespace NSMathModule {
-namespace NSFunctions {
 
 using CDensity0Base =
     NSMath::FunctionModuleBase<double(const std::vector<double>&, const double),
@@ -67,7 +62,7 @@ private:
 };
 
 
-// FindDensity1
+
 using CDensity1Base =
 NSMath::FunctionModuleBase<double(const std::vector<double>&, double),
                    NSSimd::CInstrLevel::AVX2, NSSimd::CInstrLevel::AVX, NSSimd::CInstrLevel::SSE>;
@@ -100,7 +95,7 @@ private:
 };
 
 
-// FindDensity2
+
 using CDensity2Base =
 NSMath::FunctionModuleBase<double(const std::vector<double>&, double),
                    NSSimd::CInstrLevel::AVX2, NSSimd::CInstrLevel::AVX, NSSimd::CInstrLevel::SSE>;

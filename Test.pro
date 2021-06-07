@@ -67,19 +67,6 @@ win32-g++*{
 TBBPATH = "C:\Program Files (x86)\Intel\oneAPI\tbb\latest"
 INCLUDEPATH += $${TBBPATH}"\include"
 LIBS += "-L"$${TBBPATH}"\lib\intel64\vc_mt"
-
-# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbb.lib"
-# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbb12.lib"
-# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbb_debug.lib"
-# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbb12_debug.lib"
-# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbbind.lib"
-# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbbind_2_0.lib"
-# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbbind_2_0_debug.lib"
-# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbbind_debug.lib"
-# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbmalloc.lib"
-# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbmalloc_debug.lib"
-# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbmalloc_proxy.lib"
-# LIBS += "C:\Program Files (x86)\Intel\oneAPI\tbb\latest\lib\intel64\vc_mt\tbbmalloc_proxy_debug.lib"
 LIBS += -L"$$PWD/dll/*.dll"
 
 HEADERS += \

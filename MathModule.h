@@ -30,7 +30,7 @@ namespace NSMathModule {
         void find_density_2_on_grid(std::vector<double>& means,
                                     std::vector<double>& grid,
                                     std::vector<double>* result);
-        void switch_lib(NSParallel::Libs lib = NSParallel::Libs::TBB);
+        void switch_lib(NSParallel::EParallelLibrary lib = NSParallel::EParallelLibrary::Tbb);
         void print_current_lib();
 
     private:

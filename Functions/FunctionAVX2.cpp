@@ -16,21 +16,10 @@ namespace NSFunctions {
         tmp_result += find_derivative_0(means_block, arg);
       }
 
-      size_t remainder_size = means.size() - regular_part;
-      if (remainder_size != 0) {
-            if (remainder_size == 2) {
-                Vec2d means_block(means[regular_part], means[regular_part + 1]);
-                tmp_result += find_derivative_0(means_block, arg);
-            } else if (remainder_size == 1) {
-                double mean = means[regular_part];
-                tmp_result += find_derivative_0(mean, arg);
-            } else {
-                Vec2d means_block(means[regular_part], means[regular_part + 1]);
-                tmp_result += find_derivative_0(means_block, arg);
-                double mean = means[regular_part + 2];
-                tmp_result += find_derivative_0(mean, arg);
-            }
-       }
+      for (size_t index = regular_part; index < means.size(); ++index) {
+          double mean = means[regular_part];
+          tmp_result += find_derivative_0(mean, arg);
+      }
       return tmp_result / static_cast<double>(means.size());
     }
 
@@ -44,21 +33,10 @@ namespace NSFunctions {
         tmp_result += find_derivative_1(means_block, arg);
       }
 
-      size_t remainder_size = means.size() - regular_part;
-      if (remainder_size != 0) {
-            if (remainder_size == 2) {
-                Vec2d means_block(means[regular_part], means[regular_part + 1]);
-                tmp_result += find_derivative_1(means_block, arg);
-            } else if (remainder_size == 1) {
-                double mean = means[regular_part];
-                tmp_result += find_derivative_1(mean, arg);
-            } else {
-                Vec2d means_block(means[regular_part], means[regular_part + 1]);
-                tmp_result += find_derivative_1(means_block, arg);
-                double mean = means[regular_part + 2];
-                tmp_result += find_derivative_1(mean, arg);
-            }
-       }
+      for (size_t index = regular_part; index < means.size(); ++index) {
+          double mean = means[regular_part];
+          tmp_result += find_derivative_1(mean, arg);
+      }
        return tmp_result / static_cast<double>(means.size());
     }
 
@@ -72,21 +50,10 @@ namespace NSFunctions {
         tmp_result += find_derivative_2(means_block, arg);
       }
 
-      size_t remainder_size = means.size() - regular_part;
-      if (remainder_size != 0) {
-            if (remainder_size == 2) {
-                Vec2d means_block(means[regular_part], means[regular_part + 1]);
-                tmp_result += find_derivative_2(means_block, arg);
-            } else if (remainder_size == 1) {
-                double mean = means[regular_part];
-                tmp_result += find_derivative_2(mean, arg);
-            } else {
-                Vec2d means_block(means[regular_part], means[regular_part + 1]);
-                tmp_result += find_derivative_2(means_block, arg);
-                double mean = means[regular_part + 2];
-                tmp_result += find_derivative_2(mean, arg);
-            }
-       }
+      for (size_t index = regular_part; index < means.size(); ++index) {
+          double mean = means[regular_part];
+          tmp_result += find_derivative_2(mean, arg);
+      }
       return tmp_result / static_cast<double>(means.size());
     }
 }

@@ -29,7 +29,7 @@ namespace NSMathModule {
         });
     }
 
-    void СMathModule::switch_lib(NSParallel::Libs lib) {
+    void СMathModule::switch_lib(NSParallel::EParallelLibrary lib) {
         parallel_.switch_lib(lib);
     }
 

@@ -4,22 +4,18 @@
 namespace NSMathModule {
 namespace NSParallel {
 
-ParallelModuleWin::ParallelModuleWin(): method_index_(0){}
+ParallelModuleWin::ParallelModuleWin(): method_index_(EParallelLibrary::Tbb){}
 
 void ParallelModuleWin::print_current_lib() {
-    if (method_index_ == 0) {
+    if (method_index_ == EParallelLibrary::Tbb) {
         std::cout << "TBB" << std::endl;
     } else {
         std::cout << "PPL" << std::endl;
     }
 }
 
-void ParallelModuleWin::switch_lib(Libs lib) {
-    if (lib == Libs::TBB) {
-        method_index_ = 0;
-    } else {
-        method_index_ = 1;
-    }
+void ParallelModuleWin::switch_lib(EParallelLibrary lib) {
+    method_index_ = lib;
 }
 }
 }

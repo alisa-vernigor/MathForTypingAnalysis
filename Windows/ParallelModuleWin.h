@@ -7,8 +7,10 @@
 
 namespace NSMathModule {
 namespace NSParallel {
-enum Libs {
-    TBB, PPL
+
+enum class EParallelLibrary : unsigned char {
+  Tbb = 0,
+  Ppl = 1
 };
 
 class ParallelModuleWin : public CParallelModuleTbb, CParallelModulePpl {
@@ -21,20 +23,20 @@ public:
             TFunc func) {
 
         switch(method_index_) {
-          case 0:
+          case EParallelLibrary::Tbb:
               CParallelModuleTbb::parallel_for(begin, end, func);
           break;
-          case 1:
+          case EParallelLibrary::Ppl:
              CParallelModulePpl::parallel_for(begin, end, func);
           break;
         }
     }
 
     void print_current_lib();
-    void switch_lib(Libs lib = Libs::TBB);
+    void switch_lib(EParallelLibrary lib = EParallelLibrary::Tbb);
 
 private:
-    size_t method_index_ = 0;
+    EParallelLibrary method_index_ = EParallelLibrary::Tbb;
 };
 }
 }
